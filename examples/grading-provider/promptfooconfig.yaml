@@ -1,0 +1,24 @@
+prompts:
+  - "Write a tweet about {{topic}}"
+  - "Write a very concise, funny tweet about {{topic}}"
+
+providers: [openai:gpt-4]
+
+defaultTest:
+  options:
+    provider: 
+      openai:gpt-3.5-turbo-0125
+
+tests:
+  - vars:
+      topic: bananas
+    assert:
+      - type: select-best
+        value: choose the funniest tweet
+        provider: openai:gpt-3.5-turbo-0125
+
+  - vars:
+      topic: nyc
+    assert:
+      - type: select-best
+        value: choose the tweet that contains the most facts
